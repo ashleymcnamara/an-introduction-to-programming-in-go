@@ -160,3 +160,42 @@ arr[:] is the same as arr[0:len(arr)]
 * The lenght of a map can change as we add items to it
 * Maps are not sequential. We have x[1] and with an array that would imply there must be a x[0], but maps don't have this requirement
 * If we lookup an element that doesn't exist in a map, it returns the zero value for the value type
+
+### Chapter 7 Functions
+#### Functions 
+* A function is an independent section of code that maps zero or more input parameters to zero or more output parameters. 
+* Functions (also known as procedures or subroutines) are often represented as a black box
+* Functions start with the keyword func, followed by the function's name. 
+* The parameters (inputs) of the function are defined like this: name type, name type, ...
+* After the parameters we put the return type.
+* Collectively the parameters and the return type are known as the function's signature.
+* Finally we have the function body which is a series of statements between curly braces
+* The names of the parameters don't have to match in the calling function.
+* Functions don't have access to anything in the calling function
+* Functions are built up in a “stack”. Each time we call a function we push it onto the **call stack** and each time we return from a function we pop the last function off of the stack.
+#### Named return type
+* We can also name the return type: ```
+ func f2() (r int) {
+r = 1
+return
+}```
+#### Multiple return values
+* Go is also capable of **returning multiple values** from a function
+#### **Variadic functions**
+* By using ... before the type name of the last parameter you can indicate that it takes zero or more of those parameters.
+```func Println(a ...interface{}) (n int, err error)
+The Println function takes any number of values of any type.```  
+We can also pass a slice of ints by following the slice with ...: xs := []int{1,2,3}
+fmt.Println(add(xs...))
+#### Closures
+* It is possible to create functions inside of functions
+* When you create a local function like this it also has access to other local variables
+* A function like this together with the non-local variables it references is known as a closure
+* makeEvenGenerator returns a function which generates even numbers.  
+Each time it's called it adds 2 to the local i variable which – unlike normal local variables – persists between calls.
+#### Recursion
+* A function is able to call itself
+
+
+
+
