@@ -195,7 +195,17 @@ fmt.Println(add(xs...))
 Each time it's called it adds 2 to the local i variable which – unlike normal local variables – persists between calls.
 #### Recursion
 * A function is able to call itself
-
-
-
-
+#### Defer, Panic, Recover
+* **Defer** - Go has a special statement called defer which schedules a function call to be run after the function completes
+* Defer is used when resources need to be freed in some way.   
+For example, when we open a file we need to make sure we close it later.
+`f, _ := os.Open(filename)
+defer f.Close()
+`
+* This has 3 advantages:
+    - it keeps our Close call near our Open call so its easier to understand
+    - if our function had multiple return statements Close will happen before both of them
+    - deferred functions are run even if a run-time panic occurs
+* **Panic & Recover**
+* We can handle a run-time error with the built-in recover function. Recover stops the panic and returns the value that was passed to the call to panic
+* A panic generally indicates a programmer error (for example attempting to access an index of an array that's out of bounds, forgetting to initialize a map, etc.) or an exceptional condition that there's no easy way to recover them. (Hence the name "panic")
