@@ -219,4 +219,50 @@ defer f.Close()
 **new** takes a type as an argument, allocates enough memory to fit a value of that type and returns a pointer to it.
 * Go is a garbage collected programming language which means memory is cleaned up automatically when nothing refers to it anymore
 * Pointers are rarely used with Go's built-in types, but as we will see in the next chapter, they are extremely useful when paired with structs
+### Chapter 9 - Structs and Interfaces
+* The type keyword introduces a new type. It's followed by the name of the type, the keyword struct, to indicate we are defining a **struct** type and a list of fields inside of curly braces. 
+* Each field has a name and a type
+* Like functions we can collapse fields that have the same type
+* Initialization can be done in a variety of ways: 
+>go
+>var c1 Circle  
+>c1.x = 10  
+>c1.y = 5  
+>fmt.Println(c1.x, c1.y, c1.r)  
+>c2 := new(Circle)      
+>c3 := Circle{x: 0, y: 0, r:5}  
+>c4 := Circle{0, 0, 5}  
+>fmt.Println(circleAreaC(c4)).
+* Like with other data types, this will create a local Circle variable that is by default set to zero. For a struct zero means each of the fields is set to their corresponding zero value (0 for ints, 0.0 for floats, "" for string s, nil for pointers, ...)
+* We can access fields using the . operator
+* One thing to remember is that arguments are always copied in Go.   
+If we attempted to modify one of the fields inside of the circleArea function, it would not modify the original variable.
+* **Methods**: In between the keyword func and the name of the function we've added a “receiver”. The receiver is like a parameter – it has a name and a type – but by creating
+the function in this way it allows us to call the function using the . operator
+>func (c *Circle) area() float64 {
+>return math.Pi * c.r*c.r
+>}
+* **Embedded Tyoes**
+    * A struct's fields usually represent the has-a relationship. For example a Circle has a radius
+    * We would rather say an Android is a Person, rather than an Android has a Person. Go
+supports relationships like this by using an embedded type. Also known as **anonymous fields**, embedded types look like this:  
+> type Android struct {
+>   Person
+>  Model string
+> }
 
+    * **has-a relationship**
+    type Android1 struct {
+      Person Person
+      Model string
+    }
+    
+    * **is-a relationship**
+    type Android2 struct {
+      Person
+      Model string
+    }
+    
+* **Interfaces**
+* Like a struct an interface is created using the type keyword, followed by a name and the keyword interface . But instead of defining fields, we define a “method set”.  
+A method set is a list of methods that a type must have in order to “implement” the interface.
