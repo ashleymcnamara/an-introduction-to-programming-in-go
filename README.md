@@ -209,3 +209,14 @@ defer f.Close()
 * **Panic & Recover**
 * We can handle a run-time error with the built-in recover function. Recover stops the panic and returns the value that was passed to the call to panic
 * A panic generally indicates a programmer error (for example attempting to access an index of an array that's out of bounds, forgetting to initialize a map, etc.) or an exceptional condition that there's no easy way to recover them. (Hence the name "panic")
+
+### Chapter 8 - Pointers
+* Pointers reference a location in memory where a value is stored rather than the value itself (they point to something else)
+* In Go a pointer is represented using the * (asterisk) character followed by the type of the stored value. 
+* `*` is also used to “dereference” pointer variables. Dereferencing a pointer gives us access to the value the pointer points to. When we write *xPtr = 0 we are saying "store the int 0 at the memory location xPtr refers to"
+* & is used to find the address of a variable. &x returns a *int (pointer to an int) because x is an int
+* Another way to get a pointer is to use the built-in new function.
+**new** takes a type as an argument, allocates enough memory to fit a value of that type and returns a pointer to it.
+* Go is a garbage collected programming language which means memory is cleaned up automatically when nothing refers to it anymore
+* Pointers are rarely used with Go's built-in types, but as we will see in the next chapter, they are extremely useful when paired with structs
+
