@@ -264,5 +264,32 @@ supports relationships like this by using an embedded type. Also known as **anon
     }
     
 * **Interfaces**
-* Like a struct an interface is created using the type keyword, followed by a name and the keyword interface . But instead of defining fields, we define a “method set”.  
-A method set is a list of methods that a type must have in order to “implement” the interface.
+    - Like a struct an interface is created using the type keyword, followed by a name and the keyword interface . But instead of defining fields, we define a “method set”.  
+    - A method set is a list of methods that a type must have in order to “implement” the interface.
+### Chapter 10 - Concurrency
+* Making progress on more than one task simultaneously is known as concurrency
+* Go has rich support for concurrency using goroutines and channels
+* **Goroutines**: A goroutine is a function that is capable of running concurrently with other functions. To create a goroutine we use the keyword go followed by a function invocation
+* The first goroutine is implicit and is the main function itself
+* **Goroutines** are lightweight and we can easily create thousands of them.
+* **Channels**: provide a way for two goroutines to communicate with one another and synchronize their execution.  
+    - A channel type is represented with the keyword chan followed by the type of the things that are pased on the channel
+    - The <- (left arrow) operator is used to send and receive messages on the channel  
+    `c <- "ping"` means send "ping" message to the channel c  
+    `msg := <- c` means receive a message from the channel c and store it in msg  
+    - **Channel direction**: We can specify a direction on a channel type thus restricting it to either sending or receiving
+        - **sender channel**: `func pinger(c chan<- string)`
+        - **receiver channel**: `func printer(c <-chan string)`
+    - A channel that doesn't have these restriction is known as **bi-directional channel**.  
+     A bi-directional channel can be passed to a function that takes send-only or receive only channel, but the reverse is not true
+- **Select**: Go has a special statement called select which works like a switch but for channels
+    * selects picks the first channel that is ready and receive from it (or sends to it)
+    * if more than one channels are ready then it randomly picks which one to receive from
+    * if none of the channels are ready, the statement blocks until one becomes available
+    * the select statement is often used to implement a timeout:   
+        time.After creates a channel and after the given duration will send the current time on it
+    * we can also specify a *default* case that happens immediately if none of the channels are ready, which prevents the blocking
+* **Buffered Channels**
+    - It's also possible to pass a second parameter to the make function c := make(chan int, 1) which creates a buffered channel with a capacity of 1
+    - Normally, channels are synchronous; both sides of the channel will wait until the other side is ready  
+    A **buffered channel is asynchronous**; sending or receiving a message will not wait unless the channel is already full
