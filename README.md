@@ -293,3 +293,31 @@ supports relationships like this by using an embedded type. Also known as **anon
     - It's also possible to pass a second parameter to the make function c := make(chan int, 1) which creates a buffered channel with a capacity of 1
     - Normally, channels are synchronous; both sides of the channel will wait until the other side is ready  
     A **buffered channel is asynchronous**; sending or receiving a message will not wait unless the channel is already full
+### Chapter 11 - Packages
+- Go was designed to be a language that encourages good software engineering practices.  
+An important part of high quality software is code reuse – embodied in the principle “Don't Repeat Yourself.”
+- Functions are the first layer we turn to allow code reuse
+- Go also provides another mechanism for reuse: packages, which serves three purposes:
+    - It reduces the change of having overlapping names. This keeps our function names short and succint
+    - It organizes code so that its easier to find code you want to reuse
+    - It speeds up the compiler by only requireing recompilation of smaller chunks of a program.  
+    Although we use the package *fmt*, we don't have to recompile it everytime we run our program
+   - Packages only really make sense in the context of a separate program which uses them. Without a separate program we have no way of using the package we create.
+   - In Go if something starts with a capital letter that means other packages (and programs) are able to see it.  
+   If we had named the function average instead of Average our main program would not have been able to see it.
+   - It's a good practice to only expose the parts of our package that we want other packages to use and hide everything else.  
+    This allows us to freely change those parts later without having to worry about breaking other programs, and it makes our package easier to use.
+   - Package names match the folders they fall in. There are ways around this, but it's a lot easier if you stay within this pattern.
+- **Documentation**
+    - Go has the ability to automatically generate documentation for packages we write in a similar way to the standard package documentation.
+>godoc an-introduction-to-programming-in-go-exercises/chapter11\ -\ packages/math Average  
+>func Average(xs []float64) float64  
+>   Finds the average of a series of numbers  
+>
+- Documentation in webform via `godoc -http=":6060"` and then `http://localhost:6060/pkg/
+`  
+You should be able to browse through all of the packages installed on your system.
+
+
+
+
