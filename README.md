@@ -317,6 +317,11 @@ An important part of high quality software is code reuse – embodied in the pri
 - Documentation in webform via `godoc -http=":6060"` and then `http://localhost:6060/pkg/
 `  
 You should be able to browse through all of the packages installed on your system.
+### Chapter 12 - Testing
+- Writing tests for our code is a good way to ensure quality and improve reliability
+- Go includes a special program `go test` that makes writing tests easier
+- Go test will look for any package in the current folder and run them
+- Tests are indentified by starting a function with the word Test and taking one argument of type `*testing.T`
 
 
 
