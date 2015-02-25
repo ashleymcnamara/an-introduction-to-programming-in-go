@@ -1,5 +1,7 @@
 package math
 
+import "errors"
+
 // Finds the average of a series of numbers
 func Average(xs []float64) float64 {
   if len(xs) == 0 {
@@ -16,7 +18,11 @@ func Average(xs []float64) float64 {
 }
 
 // Finds the minimum of a series of numbers
-func Min(xs []float64) float64 {
+func Min(xs []float64) (float64, error) {
+  if len(xs) == 0 {
+      return 0.0, errors.New("math: min of an empty list is not defined")
+  }
+  
   min := xs[0]
   
   for _, x := range xs {
@@ -25,12 +31,16 @@ func Min(xs []float64) float64 {
     }
   }
   
-  return min
+  return min, nil
 }
 
 
 // Finds the maximum of a series of numbers
-func Max(xs []float64) float64 {
+func Max(xs []float64) (float64, error) {
+  if len(xs) == 0 {
+      return 0, errors.New("math: max of an empty list is not defined")
+  }
+  
   max := xs[0]
   
   for _, x := range xs {
@@ -39,5 +49,5 @@ func Max(xs []float64) float64 {
     }
   }
   
-  return max
+  return max, nil
 }
