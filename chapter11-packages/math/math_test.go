@@ -30,7 +30,7 @@ func TestAverage2(t *testing.T) {
   }
 }
 
-func TestAverageWithEmptyList(t *testing.T) {
+func TestAverageWithEmptySlice(t *testing.T) {
   v := Average([]float64{})
   if v != 0.0 {
     t.Error("Average of an empty list should be 0.0, got", v)
