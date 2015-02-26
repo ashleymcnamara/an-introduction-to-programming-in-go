@@ -148,13 +148,14 @@ Go's solution to this problem is to use a different type: slices.
 * The make function also allows a 3rd parameter which represents the capacity of the underlying array which the slice points to
 * Another way to create slices is to use the [low : high] expression:  
 low is the index of where to start the slice and high is the index where to end it (but not including the index itself).
-* For convenience we are also allowed to omit low, high or even both low and high. ```
-arr[0:] is the same as arr[0:len(arr)],
-arr[:5] is the same as arr[0:5] and  
-arr[:] is the same as arr[0:len(arr)]
-```
-* Slice functions: append and copy
+* For convenience we are also allowed to omit low, high or even both low and high.
+* Slice functions: append and copy  
+>arr[0:] is the same as arr[0:len(arr)],  
+>arr[:5] is the same as arr[0:5] and  
+>arr[:] is the same as arr[0:len(arr)]  
+
 #### Maps
+
 * A map is an unordered collection of key-value pairs, also known as an associative array, a hash table or a dictionary
 * Maps are used to look up a value byy its associate key
 * The lenght of a map can change as we add items to it
@@ -242,7 +243,7 @@ the function in this way it allows us to call the function using the . operator
 >func (c *Circle) area() float64 {
 >return math.Pi * c.r*c.r
 >}
-* **Embedded Tyoes**
+* **Embedded Types**
     * A struct's fields usually represent the has-a relationship. For example a Circle has a radius
     * We would rather say an Android is a Person, rather than an Android has a Person. Go
 supports relationships like this by using an embedded type. Also known as **anonymous fields**, embedded types look like this:  
