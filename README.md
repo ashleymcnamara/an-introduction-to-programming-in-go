@@ -133,12 +133,14 @@ var (
 Other programming languages have a lot of different types of loops (while, do, until, foreach, ...) but Go has only has one (i.e. for loop) that can be used in a variety of different ways.
 
 ### Chapter 6 Arrays, Slices and Maps
+
 #### Arrays
 * An array is a numbered sequence of elements of a single type with a fixed length
 * Arrays are indexed starting from 0
 * Major issue with arrays: their length is fixed and part of the array's type name.  
 In order to remove the last item, we actually had to change the type as well.   
 Go's solution to this problem is to use a different type: slices.
+
 #### Slices
 * A slice is a segment of an array. 
 * Like arrays slices are indexable and have a length. 
@@ -163,6 +165,7 @@ low is the index of where to start the slice and high is the index where to end 
 * If we lookup an element that doesn't exist in a map, it returns the zero value for the value type
 
 ### Chapter 7 Functions
+
 #### Functions 
 * A function is an independent section of code that maps zero or more input parameters to zero or more output parameters. 
 * Functions (also known as procedures or subroutines) are often represented as a black box
@@ -173,29 +176,35 @@ low is the index of where to start the slice and high is the index where to end 
 * Finally we have the function body which is a series of statements between curly braces
 * The names of the parameters don't have to match in the calling function.
 * Functions don't have access to anything in the calling function
-* Functions are built up in a “stack”. Each time we call a function we push it onto the **call stack** and each time we return from a function we pop the last function off of the stack.
+* Functions are built up in a “stack”. Each time we call a function we push it onto the **call stack** and each time we return from a function we pop the last function off of the stack.  
+
 #### Named return type
 * We can also name the return type: ```
  func f2() (r int) {
 r = 1
 return
-}```
+}```  
+
 #### Multiple return values
-* Go is also capable of **returning multiple values** from a function
+* Go is also capable of **returning multiple values** from a function  
+
 #### **Variadic functions**
 * By using ... before the type name of the last parameter you can indicate that it takes zero or more of those parameters.
 ```func Println(a ...interface{}) (n int, err error)
 The Println function takes any number of values of any type.```  
 We can also pass a slice of ints by following the slice with ...: xs := []int{1,2,3}
 fmt.Println(add(xs...))
+
 #### Closures
 * It is possible to create functions inside of functions
 * When you create a local function like this it also has access to other local variables
 * A function like this together with the non-local variables it references is known as a closure
 * makeEvenGenerator returns a function which generates even numbers.  
-Each time it's called it adds 2 to the local i variable which – unlike normal local variables – persists between calls.
+Each time it's called it adds 2 to the local i variable which – unlike normal local variables – persists between calls.  
+
 #### Recursion
-* A function is able to call itself
+* A function is able to call itself  
+
 #### Defer, Panic, Recover
 * **Defer** - Go has a special statement called defer which schedules a function call to be run after the function completes
 * Defer is used when resources need to be freed in some way.   
@@ -220,7 +229,9 @@ defer f.Close()
 **new** takes a type as an argument, allocates enough memory to fit a value of that type and returns a pointer to it.
 * Go is a garbage collected programming language which means memory is cleaned up automatically when nothing refers to it anymore
 * Pointers are rarely used with Go's built-in types, but as we will see in the next chapter, they are extremely useful when paired with structs
+
 ### Chapter 9 - Structs and Interfaces
+
 * The type keyword introduces a new type. It's followed by the name of the type, the keyword struct, to indicate we are defining a **struct** type and a list of fields inside of curly braces. 
 * Each field has a name and a type
 * Like functions we can collapse fields that have the same type
@@ -267,7 +278,9 @@ supports relationships like this by using an embedded type. Also known as **anon
 * **Interfaces**
     - Like a struct an interface is created using the type keyword, followed by a name and the keyword interface . But instead of defining fields, we define a “method set”.  
     - A method set is a list of methods that a type must have in order to “implement” the interface.
+    
 ### Chapter 10 - Concurrency
+
 * Making progress on more than one task simultaneously is known as concurrency
 * Go has rich support for concurrency using goroutines and channels
 * **Goroutines**: A goroutine is a function that is capable of running concurrently with other functions. To create a goroutine we use the keyword go followed by a function invocation
@@ -294,7 +307,9 @@ supports relationships like this by using an embedded type. Also known as **anon
     - It's also possible to pass a second parameter to the make function c := make(chan int, 1) which creates a buffered channel with a capacity of 1
     - Normally, channels are synchronous; both sides of the channel will wait until the other side is ready  
     A **buffered channel is asynchronous**; sending or receiving a message will not wait unless the channel is already full
+
 ### Chapter 11 - Packages
+
 - Go was designed to be a language that encourages good software engineering practices.  
 An important part of high quality software is code reuse – embodied in the principle “Don't Repeat Yourself.”
 - Functions are the first layer we turn to allow code reuse
@@ -318,6 +333,7 @@ An important part of high quality software is code reuse – embodied in the pri
 - Documentation in webform via `godoc -http=":6060"` and then `http://localhost:6060/pkg/
 `  
 You should be able to browse through all of the packages installed on your system.
+
 ### Chapter 12 - Testing
 - Writing tests for our code is a good way to ensure quality and improve reliability
 - Go includes a special program `go test` that makes writing tests easier
