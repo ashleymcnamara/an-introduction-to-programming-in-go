@@ -310,7 +310,7 @@ An important part of high quality software is code reuse – embodied in the pri
    - Package names match the folders they fall in. There are ways around this, but it's a lot easier if you stay within this pattern.
 - **Documentation**
     - Go has the ability to automatically generate documentation for packages we write in a similar way to the standard package documentation.
->godoc an-introduction-to-programming-in-go-exercises/chapter11\ -\ packages/math Average  
+>godoc an-introduction-to-programming-in-go/chapter11\ -\ packages/math Average  
 >func Average(xs []float64) float64  
 >   Finds the average of a series of numbers  
 >
